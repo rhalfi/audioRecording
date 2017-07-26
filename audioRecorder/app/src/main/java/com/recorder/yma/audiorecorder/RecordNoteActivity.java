@@ -17,6 +17,7 @@ import java.io.File;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,12 +50,13 @@ public class RecordNoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_note);
         MyApp.getApp().getNetComponent().inject(this);
+        ButterKnife.bind(this);
 
     }
 
 
     @OnClick(R.id.uploadButton)
-    private void uploadRec()
+    public void uploadRec(Button button)
     {
        // mFilePath = "/data/user/0/com.recorder.yma.audiorecorder/files/rec/1500466614564.amr";
         String fileKey = fileStorageAPIS.uploadFile(this, new File(mFilePath));
@@ -75,7 +77,7 @@ public class RecordNoteActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.recordButton)
-    private void handleRecButton()
+    public void handleRecButton(Button button)
     {
         switch (mRecState) {
             case RECORDING:

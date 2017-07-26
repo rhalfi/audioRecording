@@ -7,9 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.Moment;
+import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.data.Moment;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by ramh on 25/06/2017.
@@ -23,11 +26,12 @@ public class MomentsListViewAdapter extends RecyclerView.Adapter<MomentsListView
     private static final int VIEW_TYPE_MOMENT = 0;
 
     public class ViewHolder extends RecyclerView.ViewHolder  {
-        public TextView text;
+
+        @BindView(R.id.text1) TextView text;
 
         public ViewHolder(View v) {
             super(v);
-            text = (TextView) v.findViewById(R.id.text1);
+            ButterKnife.bind(this, v);
         }
 
     }

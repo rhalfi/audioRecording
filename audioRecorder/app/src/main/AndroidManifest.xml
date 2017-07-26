@@ -11,6 +11,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:name="com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.MyApp"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -32,7 +33,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.recorder.yma.audiorecorder.RecordingsActivity" />
         </activity>
-        <activity android:name=".RecordNote"></activity>
+        <activity android:name=".RecordNoteActivity"></activity>
         <service
             android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
             android:enabled="true" />

@@ -1,5 +1,7 @@
 package com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis;
 
+import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.data.Moment;
+
 import java.util.List;
 
 import io.reactivex.Single;

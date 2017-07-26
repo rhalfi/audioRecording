@@ -25,7 +25,7 @@ public class MemoDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "new rec:" );
-                Intent intent = new Intent(MemoDetailsActivity.this, RecordNote.class);
+                Intent intent = new Intent(MemoDetailsActivity.this, RecordNoteActivity.class);
                 startActivity(intent);
             }
         });

@@ -11,13 +11,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.MyApp;
 import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.RecyclerItemClickListener;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.Moment;
+import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.data.Moment;
 import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.MomentsServiceAPIs;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.RetrofitCreator;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -29,9 +31,17 @@ public class RecordingsActivity extends AppCompatActivity {
     public static final String AWS_TOKEN = "AWS_TOKEN";
     private RecyclerView recyclerView;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    @Inject
+    MomentsServiceAPIs mMomentsServiceAPIs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        MyApp.getApp().getNetComponent().inject(this);
+
+
+
         setContentView(R.layout.activity_recordings);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -41,7 +51,7 @@ public class RecordingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "new rec:" );
-                Intent intent = new Intent(RecordingsActivity.this, RecordNote.class);
+                Intent intent = new Intent(RecordingsActivity.this, RecordNoteActivity.class);
                 startActivity(intent);
             }
         });
@@ -66,8 +76,7 @@ public class RecordingsActivity extends AppCompatActivity {
 
 
     private void initAdapter(){
-        MomentsServiceAPIs api = RetrofitCreator.getMomentsAPI();
-        compositeDisposable.add(api.getMoments()
+        compositeDisposable.add(mMomentsServiceAPIs.getMoments()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(getMomentsObservable()));

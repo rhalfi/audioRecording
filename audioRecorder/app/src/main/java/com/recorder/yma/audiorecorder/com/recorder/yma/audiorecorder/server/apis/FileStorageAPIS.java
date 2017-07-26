@@ -18,8 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.recorder.yma.audiorecorder.AWSFileModule.MY_REGION;
 import static com.recorder.yma.audiorecorder.MainActivity.TAG;
+import static com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.dagger.AppModule.MY_REGION;
 
 /**
  * Created by ramh on 25/07/2017.
