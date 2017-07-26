@@ -1,4 +1,4 @@
-package com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis;
+package com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.data;
 
 /**
  * Created by ramh on 22/06/2017.

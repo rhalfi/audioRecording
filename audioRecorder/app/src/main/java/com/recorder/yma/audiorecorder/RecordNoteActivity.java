@@ -7,48 +7,59 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.Moment;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.RetrofitCreator;
+import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.MyApp;
+import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.data.Moment;
+import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.FileStorageAPIS;
+import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.MomentsServiceAPIs;
 
 import java.io.File;
 
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.recorder.yma.audiorecorder.RecordNote.EREC_STATE.RECORDING;
-import static com.recorder.yma.audiorecorder.RecordNote.EREC_STATE.STOPPED;
+import static com.recorder.yma.audiorecorder.RecordNoteActivity.EREC_STATE.RECORDING;
+import static com.recorder.yma.audiorecorder.RecordNoteActivity.EREC_STATE.STOPPED;
 
-public class RecordNote extends AppCompatActivity {
+public class RecordNoteActivity extends AppCompatActivity {
 
-    private static final String TAG = "RecordNote";
+    private static final String TAG = "RecordNoteActivity";
     private AudioRecorder mRecorder;
     private String mFilePath;
+
+    @BindView(R.id.recordButton)
     Button mRecordButton;
+    @BindView(R.id.uploadButton)
     Button mUploadButton;
     enum EREC_STATE {STOPPED,RECORDING};
     EREC_STATE mRecState = STOPPED;
     MediaPlayer mPlayer;
+    @Inject
+    MomentsServiceAPIs mMomentsServiceAPIs;
+    @Inject
+    FileStorageAPIS fileStorageAPIS;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_note);
-        initUI();
+        MyApp.getApp().getNetComponent().inject(this);
+
     }
 
-    private void initUI() {
-        mRecordButton = (Button)findViewById(R.id.recordButton);
-        mUploadButton = (Button)findViewById(R.id.uploadButton);
-        mRecordButton.setOnClickListener(view -> handleRecButton());
-        mUploadButton.setOnClickListener(view -> uploadRec());
-    }
 
+    @OnClick(R.id.uploadButton)
     private void uploadRec()
     {
        // mFilePath = "/data/user/0/com.recorder.yma.audiorecorder/files/rec/1500466614564.amr";
-        String fileKey = AWSManager.getInstance().uploadFile(this, new File(mFilePath));
+        String fileKey = fileStorageAPIS.uploadFile(this, new File(mFilePath));
      //   Log.d(TAG, "uploadRec file key = " + fileKey);
-        Call<Void> saveNote =  RetrofitCreator.getMomentsAPI().saveNote(new Moment(fileKey,"test note mobile"));
+        Call<Void> saveNote =  mMomentsServiceAPIs.saveNote(new Moment(fileKey,"test note mobile"));
         saveNote.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -63,6 +74,7 @@ public class RecordNote extends AppCompatActivity {
 
     }
 
+    @OnClick(R.id.recordButton)
     private void handleRecButton()
     {
         switch (mRecState) {
