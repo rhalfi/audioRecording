@@ -1,4 +1,4 @@
-package com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis;
+package com.recorder.yma.audiorecorder.server.apis;
 
 import android.app.Application;
 import android.content.Context;
@@ -18,8 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.recorder.yma.audiorecorder.MainActivity.TAG;
-import static com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.dagger.AppModule.MY_REGION;
+import static com.recorder.yma.audiorecorder.login.LoginActivity.TAG;
+import static com.recorder.yma.audiorecorder.dagger.AppModule.MY_REGION;
 
 /**
  * Created by ramh on 25/07/2017.

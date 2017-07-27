@@ -1,7 +1,6 @@
-package com.recorder.yma.audiorecorder;
+package com.recorder.yma.audiorecorder.login;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -11,63 +10,52 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.MyApp;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.dagger.AppModule;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.dagger.DaggerNetComponent;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.dagger.DaggerProvisioningComponent;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.dagger.NetModule;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.dagger.ProvisioningModule;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.ProvisionAPIs;
+import com.recorder.yma.audiorecorder.AudioRecorder;
+import com.recorder.yma.audiorecorder.R;
+import com.recorder.yma.audiorecorder.dagger.ProvisioningModule;
+import com.recorder.yma.audiorecorder.util.ActivityUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-
-public class MainActivity extends AppCompatActivity {
-    public static String TAG = "MainActivity";
-    @BindView(R.id.userEditText) EditText userText;
-    @BindView(R.id.passwordEditText) EditText pswText;
+public class LoginActivity extends AppCompatActivity {
+    public static String TAG = "LoginActivity";
 
     @Inject
-    ProvisionAPIs provisionAPIs;
+    LoginPresenter mLoginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ButterKnife.bind(this);
+
+        LoginFragment loginFragment =
+                (LoginFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        if (loginFragment == null) {
+            // Create the fragment
+            loginFragment = LoginFragment.newInstance();
+            ActivityUtils.addFragmentToActivity(
+                    getSupportFragmentManager(), loginFragment, R.id.contentFrame);
+        }
+
+        // Create the presenter
+        DaggerLoginComponent.builder().loginPresenterModule(new LoginPresenterModule(loginFragment))
+            .provisioningModule(new ProvisioningModule())
+                .build().inject(this);
+
+
+
         checkPermissionForRecord();
-        setupRecording();
-        DaggerProvisioningComponent.builder()
-                // list of modules that are part of this component need to be created here too
-                .provisioningModule(new ProvisioningModule() // This also corresponds to the name of your module: %component_name%Module
-                ).build().inject(this);
+       // setupRecording();
+
     }
 
-    @OnClick(R.id.loginButton)
-    public void loginCLicked(Button button) {
-        provisionAPIs.login(MainActivity.this, userText.getText().toString(), pswText.getText().toString()
-                , new IResponseHandler() {
-                    @Override
-                    public void onFailed(String error) {
-                        Log.e(TAG, "onFailed:" + error);
-                    }
 
-                    @Override
-                    public void onSuccess() {
-                        onLoginFinished();
-                    }
-                });
-    }
 
     private static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 100;
     private void checkPermissionForRecord(){
@@ -183,16 +171,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void onLoginFinished() {
-        Log.d(TAG, "onLoginFinished:" + provisionAPIs.geTToken());
-        Intent intent = new Intent(this, RecordingsActivity.class);
-        MyApp.getApp().setmNetComponent(DaggerNetComponent.builder()
-                // list of modules that are part of this component need to be created here too
-                .appModule(new AppModule(MyApp.getApp())) // This also corresponds to the name of your module: %component_name%Module
-                .netModule(new NetModule("https://d2s4oxiwc3.execute-api.us-west-2.amazonaws.com/prod/", provisionAPIs.geTToken()))
-                .build());
-        startActivity(intent);
-    }
+
 
 
 }

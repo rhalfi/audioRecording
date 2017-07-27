@@ -7,10 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.MyApp;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.data.Moment;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.FileStorageAPIS;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.MomentsServiceAPIs;
+import com.recorder.yma.audiorecorder.data.Moment;
+import com.recorder.yma.audiorecorder.server.apis.FileStorageAPIS;
+import com.recorder.yma.audiorecorder.server.apis.MomentsServiceAPIs;
 
 import java.io.File;
 

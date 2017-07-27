@@ -1,8 +1,8 @@
-package com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder;
+package com.recorder.yma.audiorecorder;
 
 import android.app.Application;
 
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.dagger.NetComponent;
+import com.recorder.yma.audiorecorder.dagger.NetComponent;
 
 /**
  * Created by ramh on 25/07/2017.

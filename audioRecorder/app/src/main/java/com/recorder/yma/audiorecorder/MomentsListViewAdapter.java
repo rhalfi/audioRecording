@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.data.Moment;
+import com.recorder.yma.audiorecorder.data.Moment;
 
 import java.util.List;
 

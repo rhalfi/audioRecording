@@ -1,4 +1,4 @@
-package com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.dagger;
+package com.recorder.yma.audiorecorder.dagger;
 
 import android.app.Application;
 

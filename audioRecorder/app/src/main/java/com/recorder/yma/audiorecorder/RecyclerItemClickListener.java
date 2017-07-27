@@ -1,4 +1,4 @@
-package com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder;
+package com.recorder.yma.audiorecorder;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

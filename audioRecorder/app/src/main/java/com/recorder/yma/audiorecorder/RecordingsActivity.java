@@ -11,10 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.MyApp;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.RecyclerItemClickListener;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.data.Moment;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.MomentsServiceAPIs;
+import com.recorder.yma.audiorecorder.data.Moment;
+import com.recorder.yma.audiorecorder.server.apis.MomentsServiceAPIs;
 
 import java.util.ArrayList;
 import java.util.List;

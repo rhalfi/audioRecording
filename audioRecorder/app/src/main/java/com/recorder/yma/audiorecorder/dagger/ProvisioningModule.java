@@ -1,8 +1,6 @@
-package com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.dagger;
+package com.recorder.yma.audiorecorder.dagger;
 
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.ProvisionAPIs;
-
-import javax.inject.Singleton;
+import com.recorder.yma.audiorecorder.server.apis.ProvisionAPIs;
 
 import dagger.Module;
 import dagger.Provides;
@@ -14,7 +12,6 @@ import dagger.Provides;
 public class ProvisioningModule {
 
     @Provides
-    @Singleton
     ProvisionAPIs provideProvisionAPIs() {
 
         return new ProvisionAPIs();

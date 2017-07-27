@@ -1,4 +1,4 @@
-package com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.dagger;
+package com.recorder.yma.audiorecorder.dagger;
 
 import android.app.Application;
 import android.content.SharedPreferences;
@@ -7,9 +7,9 @@ import android.preference.PreferenceManager;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.FileStorageAPIS;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.MomentsServiceAPIs;
-import com.recorder.yma.audiorecorder.com.recorder.yma.audiorecorder.server.apis.ProvisionAPIs;
+import com.recorder.yma.audiorecorder.server.apis.FileStorageAPIS;
+import com.recorder.yma.audiorecorder.server.apis.MomentsServiceAPIs;
+import com.recorder.yma.audiorecorder.server.apis.ProvisionAPIs;
 
 import java.io.IOException;
 
