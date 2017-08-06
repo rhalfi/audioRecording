@@ -5,7 +5,6 @@ package com.recorder.yma.audiorecorder.login;
  */
 
 import com.recorder.yma.audiorecorder.dagger.NetComponent;
-import com.recorder.yma.audiorecorder.dagger.ProvisioningModule;
 import com.recorder.yma.audiorecorder.util.FragmentScoped;
 
 import dagger.Component;
@@ -18,7 +17,7 @@ import dagger.Component;
  * scope must be specified. All fragment components use a custom scope for this purpose.
  */
 @FragmentScoped
-@Component( modules = {LoginPresenterModule.class,ProvisioningModule.class})
+@Component( dependencies = NetComponent.class,modules = {LoginPresenterModule.class})
 public interface LoginComponent {
 
     void inject(LoginActivity activity);

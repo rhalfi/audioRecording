@@ -12,8 +12,8 @@ import android.util.Log;
 import android.widget.Button;
 
 import com.recorder.yma.audiorecorder.AudioRecorder;
+import com.recorder.yma.audiorecorder.MyApp;
 import com.recorder.yma.audiorecorder.R;
-import com.recorder.yma.audiorecorder.dagger.ProvisioningModule;
 import com.recorder.yma.audiorecorder.util.ActivityUtils;
 
 import java.io.File;
@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Create the presenter
         DaggerLoginComponent.builder().loginPresenterModule(new LoginPresenterModule(loginFragment))
-            .provisioningModule(new ProvisioningModule())
+            .netComponent(MyApp.getApp().getNetComponent())
                 .build().inject(this);
 
 

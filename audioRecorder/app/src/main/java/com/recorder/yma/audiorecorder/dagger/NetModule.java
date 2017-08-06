@@ -34,12 +34,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetModule {
 
     String mBaseUrl;
-    String mToken;
 
     // Constructor needs one parameter to instantiate.
-    public NetModule(String baseUrl, String token) {
+    public NetModule(String baseUrl ) {
         this.mBaseUrl = baseUrl;
-        mToken = token;
     }
 
     // Dagger will only look for methods annotated with @Provides
@@ -76,7 +74,7 @@ public class NetModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(HttpLoggingInterceptor logging, Cache cache) {
+    OkHttpClient provideOkHttpClient(HttpLoggingInterceptor logging, Cache cache, ProvisionAPIs provisionAPIs) {
         OkHttpClient client =  new OkHttpClient.Builder()
                 .addInterceptor(logging)
                 .addInterceptor(new Interceptor() {
@@ -85,7 +83,7 @@ public class NetModule {
                         Request originalRequest = chain.request();
 
                         Request.Builder builder = originalRequest.newBuilder().header("Authorization",
-                                mToken);
+                                provisionAPIs.geTToken());
 
                         Request newRequest = builder.build();
                         okhttp3.Response response = chain.proceed(newRequest);
@@ -127,8 +125,8 @@ public class NetModule {
 
     @Provides
     @Singleton
-    FileStorageAPIS provideFileStorageAPIS(Application context) {
+    FileStorageAPIS provideFileStorageAPIS(Application context, ProvisionAPIs provisionAPIs) {
 
-        return new FileStorageAPIS(mToken, context);
+        return new FileStorageAPIS(provisionAPIs.geTToken(), context);
     }
 }
