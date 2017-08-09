@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:name=".MyApp"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA0cmuKZw_EKlNjbPTcy-T2TIyJys2BSzQ" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name="com.recorder.yma.audiorecorder.server.apis.MyDriveEventService" android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.drive.events.HANDLE_EVENT"/>
+            </intent-filter>
+        </service>
         <activity
             android:name=".RecordingsActivity"
             android:label="@string/title_activity_recordings"
@@ -33,7 +44,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.recorder.yma.audiorecorder.RecordingsActivity" />
         </activity>
-        <activity android:name=".RecordNoteActivity"></activity>
+        <activity android:name=".record.note.RecordNoteActivity"></activity>
         <service
             android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
             android:enabled="true" />

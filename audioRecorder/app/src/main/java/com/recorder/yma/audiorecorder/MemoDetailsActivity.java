@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.recorder.yma.audiorecorder.record.note.RecordNoteActivity;
+
+
 public class MemoDetailsActivity extends AppCompatActivity {
 
 

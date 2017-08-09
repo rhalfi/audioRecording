@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +16,12 @@ import android.widget.EditText;
 
 import com.recorder.yma.audiorecorder.R;
 import com.recorder.yma.audiorecorder.RecordingsActivity;
+import com.recorder.yma.audiorecorder.util.EspressoIdlingResource;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +37,8 @@ public class LoginFragment extends Fragment implements LoginContract.View{
     @BindView(R.id.userEditText)
     EditText userText;
     @BindView(R.id.passwordEditText) EditText pswText;
+
+    @BindView(R.id.loginButton) Button mLoginButton;
 
     private LoginContract.Presenter mPresenter;
 
@@ -98,6 +104,7 @@ public class LoginFragment extends Fragment implements LoginContract.View{
     @Override
     public void onLoginSucceded() {
         Log.d(TAG, "onLoginSucceded:" );
+        EspressoIdlingResource.decrement();
         Intent intent = new Intent(getActivity(), RecordingsActivity.class);
 
         startActivity(intent);
@@ -109,10 +116,32 @@ public class LoginFragment extends Fragment implements LoginContract.View{
         mPresenter = presenter;
     }
 
+    @OnTextChanged(R.id.userEditText)
+    public void onUserTextChanged(Editable editable){
+        updateLoginButton();
+    }
+
+    @OnTextChanged(R.id.passwordEditText)
+    public void onPasswordTextChanged(Editable editable){
+        updateLoginButton();
+    }
+
+    private void updateLoginButton()
+    {
+        if(!TextUtils.isEmpty(userText.getText().toString())&& !TextUtils.isEmpty(pswText.getText().toString()))
+        {
+            mLoginButton.setEnabled(true);
+           return;
+        }
+        mLoginButton.setEnabled(false);
+
+    }
+
     @OnClick(R.id.loginButton)
     public void loginCLicked(Button button) {
 
         mPresenter.login(userText.getText().toString(), pswText.getText().toString());
+        EspressoIdlingResource.increment();
 
     }
 

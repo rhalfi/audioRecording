@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.recorder.yma.audiorecorder.data.Moment;
+import com.recorder.yma.audiorecorder.record.note.RecordNoteActivity;
 import com.recorder.yma.audiorecorder.server.apis.MomentsServiceAPIs;
 
 import java.util.ArrayList;

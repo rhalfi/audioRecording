@@ -7,7 +7,6 @@ import android.preference.PreferenceManager;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.recorder.yma.audiorecorder.server.apis.FileStorageAPIS;
 import com.recorder.yma.audiorecorder.server.apis.MomentsServiceAPIs;
 import com.recorder.yma.audiorecorder.server.apis.ProvisionAPIs;
 
@@ -123,10 +122,9 @@ public class NetModule {
         return new ProvisionAPIs();
     }
 
-    @Provides
-    @Singleton
-    FileStorageAPIS provideFileStorageAPIS(Application context, ProvisionAPIs provisionAPIs) {
 
-        return new FileStorageAPIS(provisionAPIs.geTToken(), context);
-    }
+
+
+
 }
+

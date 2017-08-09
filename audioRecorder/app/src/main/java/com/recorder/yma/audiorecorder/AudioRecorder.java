@@ -14,7 +14,7 @@ import java.io.File;
 
 public class AudioRecorder
 {
-    public static final String TAG = "AudioRecorder";
+    public static final String TAG = "AudioRecorderManager";
 
     public static enum Status
     {
@@ -147,7 +147,7 @@ public class AudioRecorder
     }
 
     /**
-     * Returns the ready-to-use AudioRecorder.
+     * Returns the ready-to-use AudioRecorderManager.
      * as {@link android.media.MediaRecorder} config.
      */
     @NonNull
@@ -157,7 +157,7 @@ public class AudioRecorder
     }
 
     /**
-     * Returns the ready-to-use AudioRecorder.
+     * Returns the ready-to-use AudioRecorderManager.
      */
     @NonNull
     public static AudioRecorder build(Context context, final String targetFileName,
