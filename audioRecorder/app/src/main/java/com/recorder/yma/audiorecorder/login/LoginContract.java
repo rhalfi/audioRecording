@@ -21,5 +21,6 @@ public interface LoginContract {
     interface Presenter extends BasePresenter {
 
         void login(String user ,String psw);
+        boolean isNeedLogin();
     }
 }

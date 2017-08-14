@@ -54,4 +54,9 @@ public class LoginPresenter implements LoginContract.Presenter {
     public void start() {
 
     }
+
+    @Override
+    public boolean isNeedLogin() {
+        return mProvisionAPIs.geTToken() == null;
+    }
 }

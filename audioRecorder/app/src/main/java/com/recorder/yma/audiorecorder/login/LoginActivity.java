@@ -1,6 +1,7 @@
 package com.recorder.yma.audiorecorder.login;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import com.recorder.yma.audiorecorder.AudioRecorder;
 import com.recorder.yma.audiorecorder.MyApp;
 import com.recorder.yma.audiorecorder.R;
+import com.recorder.yma.audiorecorder.recordings.RecordingsActivity;
 import com.recorder.yma.audiorecorder.util.ActivityUtils;
 
 import java.io.File;
@@ -31,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
 
 
@@ -48,7 +52,12 @@ public class LoginActivity extends AppCompatActivity {
             .netComponent(MyApp.getApp().getNetComponent())
                 .build().inject(this);
 
+        if(mLoginPresenter.isNeedLogin() == false) {
+            Intent intent = new Intent(this, RecordingsActivity.class);
+            startActivity(intent);
+            return;
 
+        }
 
         checkPermissionForRecord();
        // setupRecording();
@@ -170,6 +179,8 @@ public class LoginActivity extends AppCompatActivity {
         mPlayer.stop();
 
     }
+
+
 
 
 

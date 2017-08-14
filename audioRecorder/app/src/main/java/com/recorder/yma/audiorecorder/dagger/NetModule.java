@@ -117,9 +117,9 @@ public class NetModule {
 
     @Provides
     @Singleton
-    ProvisionAPIs provideProvisionAPIs() {
+    ProvisionAPIs provideProvisionAPIs(SharedPreferences sharedPreferences) {
 
-        return new ProvisionAPIs();
+        return new ProvisionAPIs(sharedPreferences);
     }
 
 

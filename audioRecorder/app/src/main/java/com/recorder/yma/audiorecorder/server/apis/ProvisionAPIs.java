@@ -1,5 +1,6 @@
 package com.recorder.yma.audiorecorder.server.apis;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.amazonaws.ClientConfiguration;
@@ -18,6 +19,8 @@ import com.amazonaws.services.cognitoidentityprovider.AmazonCognitoIdentityProvi
 import com.recorder.yma.audiorecorder.IResponseHandler;
 import com.recorder.yma.audiorecorder.MyApp;
 
+import javax.inject.Inject;
+
 import static com.recorder.yma.audiorecorder.dagger.AppModule.MY_REGION;
 import static com.recorder.yma.audiorecorder.login.LoginActivity.TAG;
 
@@ -26,16 +29,21 @@ import static com.recorder.yma.audiorecorder.login.LoginActivity.TAG;
  */
 
 public class ProvisionAPIs {
+
+    private static String LOGIN_TOKEN = "LOGIN_TOKEN";
+    SharedPreferences mSharedPreferences;
+    @Inject
+    public ProvisionAPIs(SharedPreferences preferences){
+        mSharedPreferences = preferences;
+    }
+
     private CognitoUserSession mCognitoUserSession;
 
     public String mToken;
 
     public String geTToken(){
-        if(mCognitoUserSession == null) {
-            Log.e(TAG,"geTToken called when no token available");
-            return null;
-        }
-        return  mCognitoUserSession.getIdToken().getJWTToken();
+
+        return  mSharedPreferences.getString(LOGIN_TOKEN,null);
     }
     public void login( final String user, final  String psw, IResponseHandler handler){
 
@@ -54,6 +62,7 @@ public class ProvisionAPIs {
             public void onSuccess(CognitoUserSession userSession, CognitoDevice newDevice) {
                 Log.d(TAG,"onSuccess:");
                 mCognitoUserSession = userSession;
+                mSharedPreferences.edit().putString(LOGIN_TOKEN,mCognitoUserSession.getIdToken().getJWTToken()).commit();
                 handler.onSuccess();
                 //        initTransferUtility(context);
 
