@@ -32,17 +32,17 @@
             </intent-filter>
         </service>
         <activity
-            android:name=".RecordingsActivity"
+            android:name=".recordings.RecordingsActivity"
             android:label="@string/title_activity_recordings"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MemoDetailsActivity"
             android:label="@string/title_activity_memo_details"
-            android:parentActivityName=".RecordingsActivity"
+            android:parentActivityName=".recordings.RecordingsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.recorder.yma.audiorecorder.RecordingsActivity" />
+                android:value="com.recorder.yma.audiorecorder.recordings.RecordingsActivity" />
         </activity>
         <activity android:name=".record.note.RecordNoteActivity"></activity>
         <service

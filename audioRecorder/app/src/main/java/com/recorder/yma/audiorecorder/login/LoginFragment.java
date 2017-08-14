@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.recorder.yma.audiorecorder.R;
-import com.recorder.yma.audiorecorder.RecordingsActivity;
+import com.recorder.yma.audiorecorder.recordings.RecordingsActivity;
 import com.recorder.yma.audiorecorder.util.EspressoIdlingResource;
 
 import butterknife.BindView;

@@ -3,7 +3,6 @@ package com.recorder.yma.audiorecorder.dagger;
 import android.app.Application;
 import android.content.SharedPreferences;
 
-import com.recorder.yma.audiorecorder.RecordingsActivity;
 import com.recorder.yma.audiorecorder.server.apis.MomentsServiceAPIs;
 import com.recorder.yma.audiorecorder.server.apis.MyDriveEventService;
 import com.recorder.yma.audiorecorder.server.apis.ProvisionAPIs;
@@ -19,7 +18,7 @@ import dagger.Component;
 @Singleton
 @Component(modules={AppModule.class, NetModule.class})
 public interface NetComponent {
-    void inject(RecordingsActivity activity);
+    //void inject(RecordingsActivity activity);
     void inject(MyDriveEventService service);
 
     ProvisionAPIs getProvisionAPIs();
